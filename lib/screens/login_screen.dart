@@ -39,13 +39,23 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder()
+                        label: Text('Username'),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Image(
+                          width: 50,
+                          image: AssetImage('assets/esfera.png'),
+                        )
                       ),
                     ),
                     const SizedBox(height: 10,),
                     TextFormField(
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder()
+                        label: Text("Password"),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Image(
+                          width: 50,
+                          image: AssetImage('assets/esfera.png'),
+                        )
                       ),
                     ),
                   ],
@@ -56,7 +66,7 @@ class LoginScreen extends StatelessWidget {
             Positioned(
               bottom: 40,
               child: GestureDetector(
-                onTap: (){},
+                onTap: () => Navigator.pushNamed(context, '/dash'),
                 child: const Image(
                   height: 150,
                   image: AssetImage('assets/esfera.png')

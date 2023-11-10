@@ -11,7 +11,7 @@ class DashboardScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage('https://i.pravatar.cc/'),
               ),
@@ -25,6 +25,15 @@ class DashboardScreen extends StatelessWidget {
               leading: Icon(Icons.thermostat),
               onTap: (){
                 Navigator.pushNamed(context, "/temp");
+              },
+            ),
+            ListTile(
+              title: Text('Intenciones'),
+              subtitle: Text('Miscelanea'),
+              trailing: Icon(Icons.chevron_right),
+              leading: Icon(Icons.phone_android),
+              onTap: (){
+                Navigator.pushNamed(context, "/int");
               },
             )
           ],
