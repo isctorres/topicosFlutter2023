@@ -1,8 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:image_picker/image_picker.dart';
 
-class IntencionesScreen extends StatelessWidget {
-  const IntencionesScreen({super.key});
+class IntencionesScreen extends StatefulWidget {
+  IntencionesScreen({super.key});
+
+  @override
+  State<IntencionesScreen> createState() => _IntencionesScreenState();
+}
+
+class _IntencionesScreenState extends State<IntencionesScreen> {
+  final image = ImagePicker();
+
+  String? pathImage;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +69,14 @@ class IntencionesScreen extends StatelessWidget {
             title: "Tomar Fotografia",
             subtitle: "4612279093",
             img: Image.asset('assets/1215419_chat_facetime_messages_sms_icon.png'),
-            evento: (){}
+            evento: (){
+              _takePhoto();
+              setState(() {});
+            }
           ),
+          pathImage != null 
+          ? Image.file( File(pathImage!), width: 400, height: 200, )
+          : Container()
         ],
       ),
     );
@@ -106,7 +124,8 @@ class IntencionesScreen extends StatelessWidget {
   }
 
   Future<void> _takePhoto() async{
-
+    final archivo = await image.pickImage(source: ImageSource.camera);
+    pathImage = archivo!.path;
   }
 
   Widget cardIntencion({
@@ -130,5 +149,4 @@ class IntencionesScreen extends StatelessWidget {
       ),
     );  
   }
-
 }

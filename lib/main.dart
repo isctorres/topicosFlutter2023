@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       routes: {
         "/temp" : (context) => const ConversorScreen(),
         "/dash" :(context) => const DashboardScreen(),
-        "/int" :(context) => const IntencionesScreen(),
+        "/int" :(context) => IntencionesScreen(),
       },
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
