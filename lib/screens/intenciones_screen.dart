@@ -19,8 +19,7 @@ class IntencionesScreen extends StatelessWidget {
             title: "https://itcelaya.edu.mx",
             img: Image.asset('assets/291715_chrome_google_browser_logo_network_icon.png'),
             evento: (){
-              _openWEB();
-              print('entrp');
+              _openWEB(context);
             }),
           const SizedBox(height: 5,),
           cardIntencion(
@@ -28,7 +27,9 @@ class IntencionesScreen extends StatelessWidget {
             subtitle: "4612279093",
             color: Colors.orange,
             img: Image.asset('assets/67154_yellow_phone_icon.png'),
-            evento: (){}
+            evento: (){
+              _callPhone(context);
+            }
             ),
           const SizedBox(height: 5,),
           cardIntencion(
@@ -36,7 +37,9 @@ class IntencionesScreen extends StatelessWidget {
             title: "Enviar SMS",
             subtitle: "4612279093",
             img: Image.asset('assets/1215419_chat_facetime_messages_sms_icon.png'),
-            evento: (){}
+            evento: (){
+              _sendSMS(context);
+            }
           ),
           const SizedBox(height: 5,),
           cardIntencion(
@@ -44,7 +47,9 @@ class IntencionesScreen extends StatelessWidget {
             title: "Enviar Email",
             subtitle: "4612279093",
             img: Image.asset('assets/1215419_chat_facetime_messages_sms_icon.png'),
-            evento: (){}
+            evento: (){
+              _sendEmail(context);
+            }
           ),
           const SizedBox(height: 5,),
           cardIntencion(
@@ -59,11 +64,49 @@ class IntencionesScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _openWEB() async {
+  Future<void> _openWEB(BuildContext context) async {
     Uri url = Uri.parse("https://itcelaya.edu.mx");
     if( !await launchUrl(url)  ){
-      print("Exito");
+
+      final snackBar = SnackBar(content: Text('La URL no es valida'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  }
+
+  Future<void> _callPhone(BuildContext context) async {
+    Uri url = Uri.parse("tel:4612279093");
+    if( !await launchUrl(url) ){
+
+      final snackBar = SnackBar(content: Text('El número no es valido'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  Future<void> _sendSMS(BuildContext context) async {
+    Uri url = Uri.parse("sms:4612279093?body=hola");
+    if( !await launchUrl(url) ){
+
+      final snackBar = SnackBar(content: Text('El número no es valido'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  Future<void> _sendEmail(BuildContext context) async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: 'isctorress@gmail.com',
+      query: 'subject=Saludos&body=Buen dia :)'
+    );
+
+    if( !await launchUrl(params) ){
+
+      final snackBar = SnackBar(content: Text('No se pudo enviar el EMAIL'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  Future<void> _takePhoto() async{
+
   }
 
   Widget cardIntencion({
